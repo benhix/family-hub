@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ObjectId } from 'mongodb';
+import { requireAuth, isErrorResponse } from '../auth-helper';
 import clientPromise from '@/lib/mongodb';
 import { 
   CalendarEventDocument, 
@@ -12,6 +13,13 @@ const COLLECTION_NAME = 'calendar';
 
 export async function GET() {
   try {
+    // Check authentication
+    const authResult = await requireAuth();
+    if (isErrorResponse(authResult)) {
+      return authResult;
+    }
+    const { userId } = authResult;
+
     const client = await clientPromise;
     const db = client.db(DB_NAME);
     const collection = db.collection<CalendarEventDocument>(COLLECTION_NAME);
@@ -38,6 +46,13 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+    // Check authentication
+    const authResult = await requireAuth();
+    if (isErrorResponse(authResult)) {
+      return authResult;
+    }
+    const { userId } = authResult;
+
     const client = await clientPromise;
     const db = client.db(DB_NAME);
     const collection = db.collection<CalendarEventDocument>(COLLECTION_NAME);

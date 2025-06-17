@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ObjectId } from 'mongodb';
+import { requireAuth, isErrorResponse } from '../auth-helper';
 import clientPromise from '@/lib/mongodb';
 import { 
   ShoppingItemDocument, 
@@ -13,6 +14,13 @@ const COLLECTION_NAME = 'shopping-items';
 // GET - Fetch all shopping items
 export async function GET() {
   try {
+    // Check authentication
+    const authResult = await requireAuth();
+    if (isErrorResponse(authResult)) {
+      return authResult;
+    }
+    const { userId } = authResult;
+
     const client = await clientPromise;
     const db = client.db(DB_NAME);
     const collection = db.collection<ShoppingItemDocument>(COLLECTION_NAME);
@@ -45,6 +53,13 @@ export async function GET() {
 // POST - Create new shopping item
 export async function POST(request: NextRequest) {
   try {
+    // Check authentication
+    const authResult = await requireAuth();
+    if (isErrorResponse(authResult)) {
+      return authResult;
+    }
+    const { userId } = authResult;
+
     const body: CreateShoppingItemRequest = await request.json();
     
     // Validation

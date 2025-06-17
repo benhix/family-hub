@@ -14,6 +14,15 @@ export function useShoppingItems() {
       setError(null);
       
       const response = await fetch('/api/shopping');
+      
+      // Handle non-2xx responses
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error('Authentication required. Please sign in again.');
+        }
+        throw new Error(`Failed to fetch items: ${response.status}`);
+      }
+      
       const result = await response.json();
       
       if (!result.success) {
@@ -62,6 +71,14 @@ export function useShoppingOperations() {
         body: JSON.stringify(itemData),
       });
 
+      // Handle non-2xx responses
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error('Authentication required. Please sign in again.');
+        }
+        throw new Error(`Failed to create item: ${response.status}`);
+      }
+
       const result = await response.json();
 
       if (!result.success) {
@@ -99,6 +116,14 @@ export function useShoppingOperations() {
         body: JSON.stringify(updates),
       });
 
+      // Handle non-2xx responses
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error('Authentication required. Please sign in again.');
+        }
+        throw new Error(`Failed to update item: ${response.status}`);
+      }
+
       const result = await response.json();
 
       if (!result.success) {
@@ -131,6 +156,14 @@ export function useShoppingOperations() {
       const response = await fetch(`/api/shopping/${id}`, {
         method: 'DELETE',
       });
+
+      // Handle non-2xx responses
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error('Authentication required. Please sign in again.');
+        }
+        throw new Error(`Failed to delete item: ${response.status}`);
+      }
 
       const result = await response.json();
 
