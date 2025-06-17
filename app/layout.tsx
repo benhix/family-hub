@@ -12,6 +12,7 @@ import LoadingSpinner from "./components/LoadingSpinner";
 import { Toaster } from 'react-hot-toast';
 import ScrollRestorationWrapper from "./components/ScrollRestorationWrapper";
 import ClientConditionalNavBar from "./components/ClientConditionalNavBar";
+import ResponsiveWrapper from "./components/ResponsiveWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -65,36 +66,38 @@ export default function RootLayout({
           <UserPreferencesProvider>
             <WidgetPreferencesProvider>
               <ThemeProvider>
-                <ActivityLogProvider>
-                  <LoadingProvider>
-                    <ScrollRestorationWrapper>
-                      <ClientConditionalNavBar />
-                      {children}
-                      <LoadingSpinner />
-                      <Toaster 
-                        position="top-center"
-                        containerStyle={{
-                          top: '65px', // Push below the nav bar
-                        }}
-                        toastOptions={{
-                          duration: 5000,
-                          style: {
-                            background: '#334155', // slate-700
-                            color: '#f8fafc', // slate-50
-                            border: '1px solid #475569', // slate-600
-                          },
-                          error: {
+                <ResponsiveWrapper>
+                  <ActivityLogProvider>
+                    <LoadingProvider>
+                      <ScrollRestorationWrapper>
+                        <ClientConditionalNavBar />
+                        {children}
+                        <LoadingSpinner />
+                        <Toaster 
+                          position="top-center"
+                          containerStyle={{
+                            top: '65px', // Push below the nav bar
+                          }}
+                          toastOptions={{
+                            duration: 5000,
                             style: {
-                              background: '#991b1b', // red-800
-                              color: '#fca5a5', // red-400
-                              border: '1px solid #b91c1c', // red-700
+                              background: '#334155', // slate-700
+                              color: '#f8fafc', // slate-50
+                              border: '1px solid #475569', // slate-600
                             },
-                          },
-                        }}
-                      />
-                    </ScrollRestorationWrapper>
-                  </LoadingProvider>
-                </ActivityLogProvider>
+                            error: {
+                              style: {
+                                background: '#991b1b', // red-800
+                                color: '#fca5a5', // red-400
+                                border: '1px solid #b91c1c', // red-700
+                              },
+                            },
+                          }}
+                        />
+                      </ScrollRestorationWrapper>
+                    </LoadingProvider>
+                  </ActivityLogProvider>
+                </ResponsiveWrapper>
               </ThemeProvider>
             </WidgetPreferencesProvider>
           </UserPreferencesProvider>

@@ -496,11 +496,471 @@ I'll add a back arrow to the demo page following the same pattern used in other 
 
 ---
 
+```diff
+- import { AlertTriangle, Zap, X, ThumbsDown, UserX } from 'lucide-react';
++ import { AlertTriangle, Zap, X, ThumbsDown, UserX, ArrowLeft } from 'lucide-react';
++ import Link from 'next/link';
+  
+  export default function DemoPage() {
+    return (
+-     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center p-4 pt-12">
+-       <div className="max-w-lg w-full text-center">
+-         {/* Warning Icon */}
+-         <div className="relative mb-8">
+-           <div className="w-24 h-24 mx-auto bg-red-100 dark:bg-red-500/20 rounded-2xl flex items-center justify-center mb-4 animate-bounce">
+-             <AlertTriangle size={48} className="text-red-500" />
+-           </div>
+-           
+-           {/* Crossed out sparkles */}
+-           {/* <div className="absolute -top-2 -right-2">
+-             <div className="relative">
+-               <Zap size={16} className="text-gray-400" />
+-               <X size={20} className="text-red-500 absolute -top-1 -left-1" />
+-             </div>
+-           </div> */}
+-         </div>
++     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
++       {/* Header with Back Arrow */}
++       <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border-b border-gray-200/50 dark:border-gray-700/50 sticky top-0 z-10">
++         <div className="max-w-md mx-auto px-4 py-4">
++           <div className="flex items-center justify-between">
++             <Link href="/" className="p-2 -ml-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
++               <ArrowLeft size={20} className="text-gray-600 dark:text-gray-300" />
++             </Link>
++             <h1 className="text-xl font-bold text-gray-900 dark:text-white">Help</h1>
++             <div className="w-10" /> {/* Spacer for centering */}
++           </div>
++         </div>
++       </div>
++ 
++       {/* Main Content */}
++       <div className="flex items-center justify-center p-4 pt-12">
++         <div className="max-w-lg w-full text-center">
++           {/* Warning Icon */}
++           <div className="relative mb-8">
++             <div className="w-24 h-24 mx-auto bg-red-100 dark:bg-red-500/20 rounded-2xl flex items-center justify-center mb-4 animate-bounce">
++               <AlertTriangle size={48} className="text-red-500" />
++             </div>
++             
++             {/* Crossed out sparkles */}
++             {/* <div className="absolute -top-2 -right-2">
++               <div className="relative">
++                 <Zap size={16} className="text-gray-400" />
++                 <X size={20} className="text-red-500 absolute -top-1 -left-1" />
++               </div>
++             </div> */}
++           </div>
+  
+-         {/* Main Content */}
+-         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+-           Help Page
+-         </h1>
+-         
+-         <div className="bg-white dark:bg-slate-800 rounded-xl p-8 shadow-md border border-gray-300 dark:shadow-sm dark:border-gray-700/50 space-y-6">
+-           <div className="flex items-center justify-center gap-2 mb-6">
+-             <ThumbsDown size={20} className="text-red-500" />
+-             <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+-               Plot Twist!
+-             </h2>
+-           </div>
+-           
+-           <div className="bg-yellow-50 dark:bg-yellow-500/10 border border-yellow-200 dark:border-yellow-500/20 rounded-lg p-4 mb-6">
+-             <p className="text-yellow-800 dark:text-yellow-200 font-medium text-sm">
+-               Need some help? Won&apos;t be finding it here. Looking for tutorials or guides? Try literally anywhere else on the internet. This page exists purely to disappoint and annoy you further.
+-             </p>
+-           </div>
+-           
+-           {/* <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+-             Well, <strong>tough cookies</strong>! 🍪
+-           </p> */}
+-           
+-           <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+-             Want to submit a complaint? <br /><br />You can&apos;t.
+-             <br />
+-           </p>
+-           
+-           <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-lg p-4">
+-             <h3 className="font-semibold text-red-800 dark:text-red-200 mb-3">What you&apos;re NOT getting:</h3>
+-             <div className="space-y-2 text-sm text-red-700 dark:text-red-300">
+-               <div className="flex items-center gap-2">
+-                 <X size={16} />
+-                 <span>Revolutionary productivity hacks</span>
+-               </div>
+-               <div className="flex items-center gap-2">
+-                 <X size={16} />
+-                 <span>Mind-blowing organizational tips</span>
+-               </div>
+-               <div className="flex items-center gap-2">
+-                 <X size={16} />
+-                 <span>Life-changing family management secrets</span>
+-               </div>
+-               <div className="flex items-center gap-2">
+-                 <X size={16} />
+-                 <span>Any useful information whatsoever</span>
+-               </div>
+-             </div>
+-           </div>
+-           
+-           <div className="bg-gray-50 dark:bg-gray-500/10 border border-gray-200 dark:border-gray-500/20 rounded-lg p-4">
+-             <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+-               <UserX size={16} />
+-               What you ARE getting:
+-             </h3>
+-             <p className="text-sm text-gray-600 dark:text-gray-400">
+-               A mildly amusing page that wastes 30 seconds of your time while telling you that you&apos;re not getting what you expected.
+-             </p>
+-           </div>
+-           
+-           <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+-             <p className="text-xs text-gray-500 dark:text-gray-400 italic">
+-               💡 Pro tip: Lower your expectations and you&apos;ll never be disappointed!
+-             </p>
+-           </div>
+-         </div>
+-         
+-         {/* Fake satisfaction rating */}
+-         <div className="mt-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+-           <p className="text-xs text-gray-600 dark:text-gray-300 mb-2">
+-             How satisfied are you with this service?
+-           </p>
+-           <div className="flex justify-center gap-2">
+-             <span className="text-2xl">😤</span>
+-             <span className="text-2xl">😠</span>
+-             <span className="text-2xl">🙄</span>
+-             <span className="text-2xl">😐</span>
+-             <span className="text-2xl">🤷‍♂️</span>
+-           </div>
+-           <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+-             (These buttons don&apos;t actually do anything)
+-           </p>
++           {/* Main Content */}
++           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
++             Help Page
++           </h1>
++           
++           <div className="bg-white dark:bg-slate-800 rounded-xl p-8 shadow-md border border-gray-300 dark:shadow-sm dark:border-gray-700/50 space-y-6">
++             <div className="flex items-center justify-center gap-2 mb-6">
++               <ThumbsDown size={20} className="text-red-500" />
++               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
++                 Plot Twist!
++               </h2>
++             </div>
++             
++             <div className="bg-yellow-50 dark:bg-yellow-500/10 border border-yellow-200 dark:border-yellow-500/20 rounded-lg p-4 mb-6">
++               <p className="text-yellow-800 dark:text-yellow-200 font-medium text-sm">
++                 Need some help? Won&apos;t be finding it here. Looking for tutorials or guides? Try literally anywhere else on the internet. This page exists purely to disappoint and annoy you further.
++               </p>
++             </div>
++             
++             {/* <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
++               Well, <strong>tough cookies</strong>! 🍪
++             </p> */}
++             
++             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
++               Want to submit a complaint? <br /><br />You can&apos;t.
++               <br />
++             </p>
++             
++             <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-lg p-4">
++               <h3 className="font-semibold text-red-800 dark:text-red-200 mb-3">What you&apos;re NOT getting:</h3>
++               <div className="space-y-2 text-sm text-red-700 dark:text-red-300">
++                 <div className="flex items-center gap-2">
++                   <X size={16} />
++                   <span>Revolutionary productivity hacks</span>
++                 </div>
++                 <div className="flex items-center gap-2">
++                   <X size={16} />
++                   <span>Mind-blowing organizational tips</span>
++                 </div>
++                 <div className="flex items-center gap-2">
++                   <X size={16} />
++                   <span>Life-changing family management secrets</span>
++                 </div>
++                 <div className="flex items-center gap-2">
++                   <X size={16} />
++                   <span>Any useful information whatsoever</span>
++                 </div>
++               </div>
++             </div>
++             
++             <div className="bg-gray-50 dark:bg-gray-500/10 border border-gray-200 dark:border-gray-500/20 rounded-lg p-4">
++               <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
++                 <UserX size={16} />
++                 What you ARE getting:
++               </h3>
++               <p className="text-sm text-gray-600 dark:text-gray-400">
++                 A mildly amusing page that wastes 30 seconds of your time while telling you that you&apos;re not getting what you expected.
++               </p>
++             </div>
++             
++             <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
++               <p className="text-xs text-gray-500 dark:text-gray-400 italic">
++                 💡 Pro tip: Lower your expectations and you&apos;ll never be disappointed!
++               </p>
++             </div>
++           </div>
++           
++           {/* Fake satisfaction rating */}
++           <div className="mt-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
++             <p className="text-xs text-gray-600 dark:text-gray-300 mb-2">
++               How satisfied are you with this service?
++             </p>
++             <div className="flex justify-center gap-2">
++               <span className="text-2xl">😤</span>
++               <span className="text-2xl">😠</span>
++               <span className="text-2xl">🙄</span>
++               <span className="text-2xl">😐</span>
++               <span className="text-2xl">🤷‍♂️</span>
++             </div>
++             <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
++               (These buttons don&apos;t actually do anything)
++             </p>
++           </div>
+          </div>
+        </div>
+```
+
+---
+
+Perfect! I've added a back arrow to the demo page that matches the design pattern used in your other components. Here's what I added:
+
+## Changes Made:
+
+1. **Added imports**: `ArrowLeft` from lucide-react and `Link` from Next.js
+2. **Added a header section** with:
+   - Semi-transparent background with backdrop blur (matches other pages)
+   - Sticky positioning at the top
+   - Back arrow that links to home page (`/`)
+   - Centered "Help" title
+   - Proper spacing and hover effects
+
+3. **Restructured the layout**:
+   - Moved the main content into a separate container
+   - Added proper spacing below the header
+
+The back arrow now follows the same design pattern as your settings page and other components:
+- It's positioned in the top-left
+- Has a hover effect (gray background on hover)
+- Links back to the home page
+- The header has the same semi-transparent styling with backdrop blur
+- The "Help" title is centered in the header
+
+Users can now easily navigate back to the home page from the demo/help page! 🎉
+
+---
+
+_**User**_
+
+hide the navbar on the sign in page the same way you did on the pet feeding page
+
+---
+
+_**Assistant**_
+
 
 
 ---
 
+Let me first look at the pet feeding page to see how the navbar is hidden there, then apply the same pattern to the sign in page.
 
+---
+
+Read file: app/qr-scan/pet-feeding/page.tsx
+
+---
+
+I can see that the pet feeding page doesn't have any special navbar hiding mechanism - it just doesn't render a navbar at all. Let me check how the navbar is conditionally rendered by looking at the `ClientConditionalNavBar` component and then find the sign in page.
+
+---
+
+Read file: app/components/ClientConditionalNavBar.tsx
+
+---
+
+Now let me find the sign in page to see its current structure:
+
+---
+
+<details>
+            <summary>Searched codebase "sign-in page.tsx" • **4** results</summary>
+        
+| File |
+|------|
+| `undefined` |
+| `undefined` |
+| `undefined` |
+| `undefined` |
+
+</details>
+
+---
+
+Read file: app/sign-in/[[...sign-in]]/page.tsx
+
+---
+
+Perfect! Now I can see how this works. The `ClientConditionalNavBar` component already has logic to hide the navbar on certain pages - it currently hides it on `/qr-scan/pet-feeding`. I just need to add the sign-in page path to that condition.
+
+---
+
+```diff
+  const ClientConditionalNavBar = () => {
+      const pathname = usePathname();
+-     const hideNavBar = pathname === '/qr-scan/pet-feeding';
++     const hideNavBar = pathname === '/qr-scan/pet-feeding' || pathname.startsWith('/sign-in');
+    return (
+      <div className="sticky top-0 z-40 bg-[#D6DBDC]" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
+```
+
+---
+
+Perfect! I've updated the `ClientConditionalNavBar` component to hide the navbar on the sign-in page as well. Here's what I changed:
+
+## Changes Made:
+
+**Modified `ClientConditionalNavBar.tsx`**:
+- Updated the `hideNavBar` condition to include `pathname.startsWith('/sign-in')`
+- Now the navbar will be hidden on both:
+  - `/qr-scan/pet-feeding` (existing)
+  - Any path that starts with `/sign-in` (new)
+
+## How it works:
+
+- I used `pathname.startsWith('/sign-in')` instead of exact matching because Clerk's dynamic routes use the `[[...sign-in]]` pattern, which can result in different path variations
+- This ensures the navbar is hidden on all sign-in related routes
+- The logic follows the same pattern already established for the pet feeding page
+
+Now when users visit the sign-in page, they won't see the navbar, providing a cleaner authentication experience similar to the pet feeding page! 🎉
+
+---
+
+_**User**_
+
+make it so across the whole app if the screen is wider than 625px then a white background with centered black text in the middle of the screen says 'Sorry, this app is currently designed for smaller screens. Please view on a mobile phone or reduce the width of your browser until the app displays'. If theyre in dark mode do a black background with the same text and style but white writing
+
+---
+
+_**Assistant**_
+
+
+
+---
+
+I'll create a responsive wrapper component that shows the message when the screen is too wide, then integrate it into the layout. Let me create this component first:
+
+---
+
+```diff
+- 
++ 'use client';
++ 
++ import { useState, useEffect } from 'react';
++ 
++ interface ResponsiveWrapperProps {
++   children: React.ReactNode;
++ }
++ 
++ export default function ResponsiveWrapper({ children }: ResponsiveWrapperProps) {
++   const [isWideScreen, setIsWideScreen] = useState(false);
++ 
++   useEffect(() => {
++     const checkScreenWidth = () => {
++       setIsWideScreen(window.innerWidth > 625);
++     };
++ 
++     // Check on mount
++     checkScreenWidth();
++ 
++     // Add event listener for resize
++     window.addEventListener('resize', checkScreenWidth);
++ 
++     // Cleanup
++     return () => window.removeEventListener('resize', checkScreenWidth);
++   }, []);
++ 
++   if (isWideScreen) {
++     return (
++       <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center p-8">
++         <div className="max-w-md text-center">
++           <h1 className="text-2xl font-bold text-black dark:text-white mb-4">
++             📱 Mobile Only
++           </h1>
++           <p className="text-black dark:text-white leading-relaxed">
++             Sorry, this app is currently designed for smaller screens. Please view on a mobile phone or reduce the width of your browser until the app displays.
++           </p>
++           <div className="mt-6 text-sm text-gray-600 dark:text-gray-400">
++             Current width needs to be 625px or less
++           </div>
++         </div>
++       </div>
++     );
++   }
++ 
++   return <>{children}</>;
++ } 
+```
+
+---
+
+Now I need to integrate this responsive wrapper into the layout to wrap the entire app:
+
+---
+
+```diff
+  import ScrollRestorationWrapper from "./components/ScrollRestorationWrapper";
+  import ClientConditionalNavBar from "./components/ClientConditionalNavBar";
++ import ResponsiveWrapper from "./components/ResponsiveWrapper";
+  
+  const inter = Inter({ subsets: ["latin"] });
+```
+
+```diff
+              <WidgetPreferencesProvider>
+                <ThemeProvider>
++                 <ResponsiveWrapper>
+                    <ActivityLogProvider>
+                      <LoadingProvider>
+```
+
+```diff
+                      </LoadingProvider>
+                    </ActivityLogProvider>
++                 </ResponsiveWrapper>
+                </ThemeProvider>
+              </WidgetPreferencesProvider>
+```
+
+---
+
+Perfect! I've successfully implemented the responsive wrapper across your entire app. Here's what I created:
+
+## Changes Made:
+
+### 1. **New Component: `ResponsiveWrapper.tsx`**
+- Monitors screen width using `useState` and `useEffect`
+- Shows a mobile-only message when screen width > 625px
+- Handles both light and dark modes:
+  - **Light mode**: White background with black text
+  - **Dark mode**: Black background with white text
+- Includes a helpful indicator showing the current width requirement
+
+### 2. **Updated `layout.tsx`**
+- Imported the new `ResponsiveWrapper` component
+- Wrapped the entire app content with `ResponsiveWrapper`
+- Positioned it inside `ThemeProvider` so it has access to dark mode context
+
+## How it works:
+
+- **On screens ≤ 625px**: The app displays normally
+- **On screens > 625px**: Shows the mobile-only message with:
+  - 📱 Mobile Only header
+  - Your exact requested message
+  - Current width requirement (625px or less)
+  - Proper light/dark mode styling
+
+The wrapper uses a resize event listener to dynamically detect when users resize their browser window, so the app will immediately show/hide the message as they cross the 625px threshold.
+
+Now your app will display the mobile-only message on any screen wider than 625px across the entire application! 🎉
 
 ---
 
