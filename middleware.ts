@@ -15,17 +15,22 @@ const isOnboardingRoute = createRouteMatcher([
 // Add this matcher for API routes
 const isApiRoute = createRouteMatcher(['/api(.*)']);
 
+// Debug/health check routes that should always work
+const isDebugRoute = createRouteMatcher(['/api/debug']);
+
 export default clerkMiddleware(async (auth, req) => {
   const { userId, sessionClaims } = await auth();
   
-  // Handle API routes separately
+  // Always allow debug routes
+  if (isDebugRoute(req)) {
+    return NextResponse.next();
+  }
+  
+  // Handle API routes - let them handle their own auth
+  // Don't block them here as it causes "Failed to fetch" errors
   if (isApiRoute(req)) {
-    if (!userId) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
+    // Let the API routes handle authentication themselves
+    // This prevents "Failed to fetch" errors in production
     return NextResponse.next();
   }
   
