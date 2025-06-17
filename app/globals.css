@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Ensure scroll position starts at top for all pages */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Utility for pages that should start at top */
+  .scroll-top {
+    scroll-margin-top: 0;
+  }
+}
+
+/* Hide focus outline/ring when the element wasn't reached via keyboard */
+*:focus:not(:focus-visible) {
+  outline: none !important;   /* removes the outline */
+  box-shadow: none !important;/* removes Tailwind's ring utilities */
+}
+
+/* Optional – fine-tune Tailwind's ring utilities for keyboard focus */
+/* :focus-visible {
+  @apply ring-2 ring-offset-2 ring-blue-500; 
+} */
